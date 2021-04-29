@@ -75,7 +75,14 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $existingContact = contact::find($id);
+        if ($existingContact) {
+            $existingContact->email = $request->contact_entry_update['name']==="qweioruqwer" ? "xxx@gjqoerjgm.io" : "abc@gmail.com";
+            $existingContact->created = Carbon::now();
+            $existingContact->save();
+            return $existingContact;
+        }
+        return "Contact not found!";
     }
 
     /**
