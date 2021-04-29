@@ -13,7 +13,12 @@ class ContactlistSeeder extends Seeder
      */
     public function run()
     {
-        //
-        DB::table('member')
+        for($i=9; $i>0; $i--) {
+            DB::table('contacts')->insert([
+                'name'=>Str::random(10),
+                'email'=>Str::random(10).'@gmail.com',
+                'address'=>Str::random(10)
+            ]);
+        }
     }
 }
