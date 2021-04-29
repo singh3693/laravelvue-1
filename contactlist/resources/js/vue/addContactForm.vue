@@ -1,15 +1,12 @@
 <template>
     <div class='addContact'>
         <input type="text" v-model='contact.name' />
-        <font-awesome-icon
-            icon="plus-square"
-            @click="addContact()"
-            :class="[ contact.name ? 'active' : 'inactive', 'plus']"
-        />
+        <actionButtons />
     </div>
 </template>
 
 <script>
+import actionButtons from './actionButtons'
 export default {
     data: function() {
         return {
@@ -37,6 +34,9 @@ export default {
                 console.log( error );
             })
         }
+    },
+    components: {
+        actionButtons
     }
 }
 </script>
