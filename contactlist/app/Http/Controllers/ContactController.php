@@ -25,10 +25,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        $newContact = new Contact;
-        $newContact->name = $request->item['name'];
-        $newContact->save();
-        return $newContact;
+        
     }
 
     /**
@@ -39,7 +36,12 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newContact = new Contact;
+        $newContact->name = $request->contact_entry23['name'];
+        $newContact->email = $request->contact_entry23['email'];
+        $newContact->address = $request->contact_entry23['address'];
+        $newContact->save();
+        return $newContact;
     }
 
     /**
