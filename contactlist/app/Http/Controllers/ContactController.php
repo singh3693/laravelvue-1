@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Contact;
+
 class ContactController extends Controller
 {
     /**
@@ -13,7 +15,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        return Contact::orderBy('created', 'DESC')->get();
     }
 
     /**
@@ -23,7 +25,10 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        $newContact = new Contact;
+        $newContact->name = $request->item['name'];
+        $newContact->save();
+        return $newContact;
     }
 
     /**
