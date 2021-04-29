@@ -14,7 +14,9 @@ export default {
     data: function() {
         return {
             contact: {
-                name: ""
+                name: "",
+                email: "vioqwe@qiower.io",
+                address: "niqwer qowerqowr"
             }
         }
     },
@@ -25,7 +27,7 @@ export default {
             }
 
             axios.post('api/contact/create', {
-                contact: this.contact
+                contact_entry23: this.contact
             }).then(res=> {
                 if (res.status==201) {
                     this.contact.name == "";
