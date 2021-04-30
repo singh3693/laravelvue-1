@@ -17,24 +17,6 @@ export default {
             }
         }
     },
-    methods: {
-        addContact() {
-            if (this.contact.name =='') {
-                return;
-            }
-
-            axios.post('api/contact/create', {
-                contact_entry23: this.contact
-            }).then(res=> {
-                if (res.status==201) {
-                    this.contact.name == "";
-                }
-            })
-            .catch( error => {
-                console.log( error );
-            })
-        }
-    },
     components: {
         actionButtons
     }

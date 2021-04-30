@@ -18,9 +18,29 @@ export default {
     data: function() {
        return {
             contact: {
-                name: this.contactData
+                name: this.contactData,
+                email: "vioqwe@qiower.io",
+                address: "niqwer qowerqowr"
             }
        }
+    },
+    methods: {
+        addContact() {
+            if (this.contact.name =='') {
+                return;
+            }
+
+            axios.post('api/contact/create', {
+                contact_entry23: this.contact
+            }).then(res=> {
+                if (res.status==201) {
+                    this.contact.name == "";
+                }
+            })
+            .catch( error => {
+                console.log( error );
+            })
+        }
     },
     watch: {
         contactData: function() {
