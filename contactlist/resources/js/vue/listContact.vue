@@ -22,6 +22,7 @@
                         <actionButtons
                             :contactData='contact.name'
                             :menuClicked='menuClicked'
+                            :id='contact.id'
                         />
                     </td>
                 </tr>

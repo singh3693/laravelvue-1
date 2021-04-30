@@ -9,7 +9,6 @@
 
 <script>
     import appBody from './appBody';
-
     export default {
         components: { 
             appBody

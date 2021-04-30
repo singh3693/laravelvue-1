@@ -95,7 +95,7 @@ class ContactController extends Controller
     public function destroy($id)
     {
         //
-        $existing_contact = Contact_Entry::find($id);
+        $existing_contact = Contact::find($id);
         if ($existing_contact) {
             $existing_contact->delete();
             return "Contact deleted";

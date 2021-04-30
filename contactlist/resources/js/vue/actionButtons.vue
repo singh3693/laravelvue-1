@@ -4,7 +4,7 @@
             <li v-if="openMenu">
                 <font-awesome-icon
                     icon="align-justify"
-                    @click="addContact()"
+                    @click="editContact()"
                     :class="[ contact.name ? 'active' : 'inactive', 'plus']"
                 ></font-awesome-icon>
                 <span>
@@ -25,9 +25,9 @@
 <script>
 export default {
     props: {
-        contactData: {
-            type: String,
-            required: false
+        id: {
+            type: Number,
+            required: true
         },
         menuClicked: {
             type: Boolean,
@@ -46,21 +46,22 @@ export default {
        }
     },
     methods: {
-        addContact() {
-            if (this.contact.name =='') {
-                return;
-            }
+        deleteContact() {
+            // if (this.contact.name =='') {
+            //     return;
+            // }
 
-            axios.post('api/contact/create', {
-                contact_entry23: this.contact
-            }).then(res=> {
+            axios.delete(`api/contact/${this.id}`)
+            .then(res=> {
                 if (res.status==201) {
-                    this.contact.name == "";
+                    // refresh page
                 }
             })
             .catch( error => {
                 console.log( error );
             })
+        },
+        editContact() {
         }
     },
     watch: {
