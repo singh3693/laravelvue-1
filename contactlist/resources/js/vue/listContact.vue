@@ -1,15 +1,32 @@
 <template>
-    <div class='addContact'>
-        <input type="text" v-model='contact.name' />
-        <font-awesome-icon
-            icon="ellipsis-v"
-            @click="toggleMenu()"
-            :class="[ contact.name ? 'active' : 'inactive', 'plus']"
-        />
-        <actionButtons
-            :contactData='contact.name'
-            :menuClicked='menuClicked'
-        />
+    <div class='appBody'>
+        <table class='listContactTable'>
+            <thead>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Created</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <tr v-for='contact in contacts' :key='contact.id'>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.email}}</td>
+                    <td>{{contact.address}}</td>
+                    <td>{{contact.created}}</td>
+                    <td>
+                        <font-awesome-icon
+                            icon="ellipsis-v"
+                            @click="toggleMenu()"
+                        />
+                        <actionButtons
+                            :contactData='contact.name'
+                            :menuClicked='menuClicked'
+                        />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
@@ -19,16 +36,27 @@ import actionButtons from './actionButtons'
 export default {
     data: function() {
         return {
-            contact: {
-                name: "",
-                email: "vioqwe@qiower.io",
-                address: "niqwer qowerqowr"
-            },
+            contacts: [],          
             menuClicked: false
         }
     },
     components: {
         actionButtons
+    },
+    created() {
+        axios.get('api/contacts')
+        .then(
+            res => {
+                this.contacts = res.data;
+                if (res.status=='200') {
+                    return 'Fetch success'
+                }
+            }
+        ).catch(
+            err=>{
+                return err;
+            }
+        )
     },
     methods: {
         toggleMenu() {
@@ -40,16 +68,29 @@ export default {
 
 
 <style scoped>
-    .addContact {
+    .appBody {
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
     }
     input {
-        background: #e3e3e3;
+        background: #fcf9f9;
         border: 0;
         outline: none;
         padding: 0.5em;
         margin-right: 1em;
+    }
+    .listContactTable {
+        width: 100%;
+        text-align: left;
+        background: #fff;
+    }
+    thead {
+        background: #8d8888;
+        color: #fff;
+    }
+    tr:nth-child(even) {
+        background: #b3b3b3;
+        color: #fff;
     }
 </style>
