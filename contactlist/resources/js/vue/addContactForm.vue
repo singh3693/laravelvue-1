@@ -1,7 +1,7 @@
 <template>
     <div class='addContact'>
         <input type="text" v-model='contact.name' />
-        <actionButtons />
+        <actionButtons :contactData='contact.name'/>
     </div>
 </template>
 
@@ -53,17 +53,6 @@ export default {
         outline: none;
         padding: 0.5em;
         margin-right: 1em;
-    }
-    .plus {
-        font-size: 20px;
-    }
-
-    .active {
-        color: green;
-    }
-
-    .inactive {
-        color: grey;
     }
 
 </style>
