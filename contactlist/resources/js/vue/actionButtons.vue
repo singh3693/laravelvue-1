@@ -1,20 +1,25 @@
 <template>
-    <ul>
-        <li>
-            <font-awesome-icon
-                icon="plus-square"
-                @click="addContact()"
-                :class="[ contact.name ? 'active' : 'inactive', 'plus']"
-            />
-        </li>
-        <li>
-            <font-awesome-icon
-                icon="trash"
-                @click="addContact()"
-                :class="[ contact.name ? 'active' : 'inactive', 'plus']"
-            />
-        </li>
-    </ul>
+    <div class='actionButtonContainer'>
+        <ul>
+            <li v-if="openMenu">
+                <font-awesome-icon
+                    icon="align-justify"
+                    @click="addContact()"
+                    :class="[ contact.name ? 'active' : 'inactive', 'plus']"
+                ></font-awesome-icon>
+                <span>
+                    Edit
+                </span> 
+            </li>
+            <li v-if="openMenu">
+                <font-awesome-icon
+                    icon="times-circle"
+                    @click="deleteContact()"
+                    :class="[ contact.name ? 'active' : 'inactive', 'plus']"
+                ></font-awesome-icon>Delete
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
@@ -23,11 +28,16 @@ export default {
         contactData: {
             type: String,
             required: false
+        },
+        menuClicked: {
+            type: Boolean,
+            default: false
         }
     },
     
     data: function() {
        return {
+           openMenu: false,
             contact: {
                 name: this.contactData,
                 email: "vioqwe@qiower.io",
@@ -56,6 +66,9 @@ export default {
     watch: {
         contactData: function() {
             this.contact.name = this.contactData;
+        },
+        menuClicked: function() {
+            this.openMenu = this.menuClicked;
         }
     }
 }
@@ -71,5 +84,19 @@ export default {
 
     .inactive {
         color: grey;
+    }
+    
+    ul {
+        padding-left: 0.2em;
+    }
+    
+    li {
+        list-style: none;
+        border: 1px solid #000;
+        padding: 3px;
+    }
+    .actionButtonContainer {
+        margin-left: 1em;
+        padding: 3px 3px 3px 0;
     }
 </style>

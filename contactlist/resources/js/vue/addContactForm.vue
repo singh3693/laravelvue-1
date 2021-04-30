@@ -1,7 +1,15 @@
 <template>
     <div class='addContact'>
         <input type="text" v-model='contact.name' />
-        <actionButtons :contactData='contact.name'/>
+        <font-awesome-icon
+            icon="ellipsis-v"
+            @click="toggleMenu()"
+            :class="[ contact.name ? 'active' : 'inactive', 'plus']"
+        />
+        <actionButtons
+            :contactData='contact.name'
+            :menuClicked='menuClicked'
+        />
     </div>
 </template>
 
@@ -14,11 +22,17 @@ export default {
                 name: "",
                 email: "vioqwe@qiower.io",
                 address: "niqwer qowerqowr"
-            }
+            },
+            menuClicked: false
         }
     },
     components: {
         actionButtons
+    },
+    methods: {
+        toggleMenu() {
+            this.menuClicked = !this.menuClicked; // ? false : true;
+        }
     }
 }
 </script>
