@@ -2,21 +2,18 @@
  <div class='contactlistContainer'>
     <div class="heading">
         <h2 id="title">contact list</h2>
-        <addContactForm />
+        <appBody />
     </div>
     <listContact />
  </div>
 </template>
 
 <script>
-    import addContactForm from './addContactForm';
-    import listContact from './listContact';
-
+    import appBody from './appBody';
 
     export default {
         components: { 
-            addContactForm,
-            listContact
+            appBody
         }
     }
 </script>
