@@ -1,9 +1,20 @@
 <template>
-    <font-awesome-icon
-        icon="plus-square"
-        @click="addContact()"
-        :class="[ contact.name ? 'active' : 'inactive', 'plus']"
-    />
+    <ul>
+        <li>
+            <font-awesome-icon
+                icon="plus-square"
+                @click="addContact()"
+                :class="[ contact.name ? 'active' : 'inactive', 'plus']"
+            />
+        </li>
+        <li>
+            <font-awesome-icon
+                icon="trash"
+                @click="addContact()"
+                :class="[ contact.name ? 'active' : 'inactive', 'plus']"
+            />
+        </li>
+    </ul>
 </template>
 
 <script>
