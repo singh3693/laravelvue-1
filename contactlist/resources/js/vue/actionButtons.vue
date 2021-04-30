@@ -1,16 +1,18 @@
 <template>
-    <!-- <font-awesome-icon
+    <font-awesome-icon
         icon="plus-square"
         @click="addContact()"
         :class="[ contact.name ? 'active' : 'inactive', 'plus']"
-    /> -->
-    <div style='border: 2px solid green'>{{contactData}}</div>
+    />
 </template>
 
 <script>
 export default {
     props: {
-        contactData: String
+        contactData: {
+            type: String,
+            required: false
+        }
     },
     
     data: function() {
@@ -19,6 +21,11 @@ export default {
                 name: this.contactData
             }
        }
+    },
+    watch: {
+        contactData: function() {
+            this.contact.name = this.contactData;
+        }
     }
 }
 </script>
