@@ -1,7 +1,9 @@
 <template>
     <div class='headerBarContainer'>
         <span>Contacts</span>
-        <addContactButton />
+        <addContactButton 
+            @addButtonClicked="addButtonClicked()"
+        />
     </div>
 </template>
 
@@ -10,6 +12,11 @@
     export default {
         components: {
             addContactButton
+        },
+        methods: {
+            addButtonClicked: function() {
+                this.$emit('addButtonClicked')
+            }
         }
     }
 </script>
@@ -19,5 +26,10 @@
         justify-content: space-between;
         align-items: center;
         border: 2px solid #c2c2c2;
+        padding: 2em;
+        background: #fff;
+    }
+    .headerBarContainer span {
+        font-weight: bold;
     }
 </style>

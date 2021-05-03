@@ -1,7 +1,6 @@
 <template>
  <div class='contactlistContainer'>
     <div class="heading">
-        <h2 id="title">contact list</h2>
         <appBody />
     </div>
  </div>

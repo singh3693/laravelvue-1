@@ -1,22 +1,27 @@
 <template>
     <div class='actionButtonContainer'>
+        <font-awesome-icon
+            icon="ellipsis-v"
+            @click="toggleMenu()"
+        />
         <ul>
-            <li v-if="openMenu">
+            <li v-if="menuClicked"
+                @click="openEditDialog()"
+            >
                 <font-awesome-icon
                     icon="align-justify"
-                    @click="editContact()"
                     :class="[ contact.name ? 'active' : 'inactive', 'plus']"
                 ></font-awesome-icon>
-                <span>
-                    Edit
-                </span> 
+                <span>Edit</span> 
             </li>
-            <li v-if="openMenu">
+            <li v-if="menuClicked"
+                @click="deleteContact()"
+            >
                 <font-awesome-icon
                     icon="times-circle"
-                    @click="deleteContact()"
                     :class="[ contact.name ? 'active' : 'inactive', 'plus']"
-                ></font-awesome-icon>Delete
+                ></font-awesome-icon>
+                <span>Delete</span>
             </li>
         </ul>
     </div>
@@ -28,48 +33,42 @@ export default {
         id: {
             type: Number,
             required: true
-        },
-        menuClicked: {
-            type: Boolean,
-            default: false
         }
     },
     
     data: function() {
        return {
-           openMenu: false,
+           menuClicked: false,
             contact: {
-                name: this.contactData,
-                email: "vioqwe@qiower.io",
-                address: "niqwer qowerqowr"
+                name: "",
+                email: "",
+                address: ""
             }
        }
     },
     methods: {
+        toggleMenu() {
+            this.menuClicked = !this.menuClicked;
+        },
+    
         deleteContact() {
-            // if (this.contact.name =='') {
-            //     return;
-            // }
-
             axios.delete(`api/contact/${this.id}`)
             .then(res=> {
-                if (res.status==201) {
-                    // refresh page
+                if (res.status==200) {
+                    this.$emit('delete-succeeded')
                 }
             })
             .catch( error => {
                 console.log( error );
             })
         },
-        editContact() {
+        openEditDialog() {
+            this.$emit('editButtonClicked')
         }
     },
     watch: {
         contactData: function() {
             this.contact.name = this.contactData;
-        },
-        menuClicked: function() {
-            this.openMenu = this.menuClicked;
         }
     }
 }
@@ -92,13 +91,19 @@ export default {
         padding-left: 0.2em;
     }
     
-    li {
+    ul li {
+        background: #fff;
         list-style: none;
         border: 1px solid #000;
-        padding: 3px;
+        padding: 8px;
+        width: 150%;
     }
     .actionButtonContainer {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
         margin-left: 1em;
+        position: absolute;
         padding: 3px 3px 3px 0;
     }
 </style>

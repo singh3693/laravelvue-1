@@ -38,9 +38,9 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $newContact = new Contact;
-        $newContact->name = $request->contact_entry23['name'];
-        $newContact->email = $request->contact_entry23['email'];
-        $newContact->address = $request->contact_entry23['address'];
+        $newContact->name = $request->contact['name'];
+        $newContact->email = $request->contact['email'];
+        $newContact->address = $request->contact['address'];
         $newContact->save();
         return $newContact;
     }
@@ -78,7 +78,9 @@ class ContactController extends Controller
     {
         $existingContact = contact::find($id);
         if ($existingContact) {
-            $existingContact->email = $request->contact_entry_update['name']==="qweioruqwer" ? "xxx@gjqoerjgm.io" : "abc@gmail.com";
+            $existingContact->name = $request->contact['name'];
+            $existingContact->email = $request->contact['email'];
+            $existingContact->address = $request->contact['address'];
             $existingContact->created = Carbon::now();
             $existingContact->save();
             return $existingContact;
@@ -94,7 +96,6 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        //
         $existing_contact = Contact::find($id);
         if ($existing_contact) {
             $existing_contact->delete();

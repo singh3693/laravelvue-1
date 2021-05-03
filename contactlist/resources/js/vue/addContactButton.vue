@@ -1,30 +1,17 @@
 <template>
-    <div class='addButtonContainer'>
-        <span>Add</span>
+    <div class='addButtonContainer' @click="openDialogue()">
         <font-awesome-icon
-            icon="plus-square"
-            :class="[ contactEntry23.name ? 'active' : 'inactive', 'plus']"
+            icon="plus-circle"
         />
+        <span>Add contact</span>
     </div>
 </template>
 
 <script>
     export default {
-        data: function() {
-            return {
-                contactEntry23: {
-                    name: 'ln 15',
-                    email: 'qwerjkl@jofasldkf.io',
-                    address: 'qweoirql qwelrkjqwer uqeowiruqewoir'
-                }
-            }
-        },
         methods: {
-            addContact() {
-                // axio.post('api.contact', {contactEntry23}).then(res=> {
-                //     if (res.status === '201')
-                //         return 'Item added'
-                // })
+            openDialogue() {
+                this.$emit('addButtonClicked');
             }
         }
     }
@@ -32,20 +19,16 @@
 
 <style scoped>
     .addButtonContainer {
-        color: blue;
+        color: #fff;
         border: 1px solid pink;
+        padding: 1em 1.5em;
+        background: blue;
+        border-radius: 5px;
     }
     .plus {
         font-size: 20px;
     }
 
-    .active {
-        color: green;
-    }
-
-    .inactive {
-        color: grey;
-    }
     
     ul {
         margin-top: 0;
